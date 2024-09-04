@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Código QR WhatsApp Hack</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            background-color: #f0f0f0;
+        }
+        h1 {
+            margin-top: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 10px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #qrCode {
+            margin: 20px;
+        }
+        #qrCode img {
+            cursor: pointer;
+            max-width: 100%;
+            height: auto;
+        }
+        #largeImage {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            z-index: 1000;
+            border-radius: 10px;
+        }
+        #largeImage img {
+            max-width: 90vw;
+            max-height: 90vh;
+        }
+        #largeImage button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #fff;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Código QR WhatsApp Hack</h1>
+    <p>Haz clic en el botón para generar un código QR :D. Hecho por tu wasa</p>
+    <button onclick="generateQR()">Generar Código QR</button>
+    <br><br>
+    <div id="qrCode"></div>
+    <div id="largeImage">
+        <button onclick="closeLargeImage()">Cerrar</button>
+        <img id="largeQRCodeImage" src="" alt="Código QR Grande">
+    </div>
+
+    <script>
+    
+        let lastUserId = 2811418;
+
+
+        function generateQR() {
+        
+            const randomDecrement = Math.floor(Math.random() * 100) + 1;
+
+
+            const newUserId = lastUserId - randomDecrement;
+
+
+            const qrContent = `user_id:${newUserId}`;
+
+  
+            document.getElementById("qrCode").innerHTML = "";
+
+    
+            const qrCode = new QRCode(document.getElementById("qrCode"), {
+                text: qrContent,
+                width: 512,  
+                height: 512, 
+                colorDark : "#000000",
+                colorLight : "#ffffff",
+                correctLevel : QRCode.CorrectLevel.H
+            });
+
+            
+            lastUserId = newUserId;
+
+            
+            const qrImage = document.querySelector('#qrCode img');
+            if (qrImage) {
+                qrImage.onclick = function() {
+                    showLargeImage(qrImage.src);
+                };
+            }
+        }
+
+ 
+        function showLargeImage(src) {
+            const largeImageDiv = document.getElementById('largeImage');
+            const largeImage = document.getElementById('largeQRCodeImage');
+            largeImage.src = src;
+            largeImageDiv.style.display = 'block';
+        }
+
+   
+        function closeLargeImage() {
+            document.getElementById('largeImage').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
