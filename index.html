@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Código QR Wasa</title>
+    <title>Código QR Wasap</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <style>
         body {
@@ -37,6 +37,10 @@
             max-width: 100%;
             height: auto;
         }
+        #qrContent {
+            font-size: 18px;
+            margin-top: 10px;
+        }
         #largeImage {
             display: none;
             position: fixed;
@@ -52,61 +56,86 @@
             max-width: 90vw;
             max-height: 90vh;
         }
-        #largeImage button {
+        #largeImage button.close-btn {
             position: absolute;
             top: 10px;
             right: 10px;
-            background-color: #fff;
+            background-color: #ff4444;
+            color: white;
             border: none;
             padding: 10px;
             cursor: pointer;
             border-radius: 5px;
+            font-size: 16px;
+        }
+        #largeImage button.download-btn {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        #largeImage button.close-btn:hover {
+            background-color: #ff0000;
+        }
+        #largeImage button.download-btn:hover {
+            background-color: #218838;
         }
     </style>
 </head>
 <body>
-    <h1>Código QR Wasa</h1>
-    <p>Haz clic en el botón para generar un código QR :D. Hecho por tu wasa</p>
+    <h1>Código QR WhatsApp Hack</h1>
+    <p>Hecho por tu Wasa :D</p>
     <button onclick="generateQR()">Generar Código QR</button>
     <br><br>
     <div id="qrCode"></div>
+    <p id="qrContent"></p>
     <div id="largeImage">
-        <button onclick="closeLargeImage()">Cerrar</button>
+        <button class="close-btn" onclick="closeLargeImage()">Cerrar</button>
         <img id="largeQRCodeImage" src="" alt="Código QR Grande">
+        <button class="download-btn" onclick="downloadQR()">Descargar Código QR</button>
     </div>
-
+<p>La probabilidad de que al menos un código se repita en 10 intentos consecutivos es aproximadamente 2.78%.</p>
     <script>
-    
+        // Último user_id escaneado (puedes cambiar este valor)
         let lastUserId = 2811418;
 
-
+        // Función para generar y mostrar el código QR
         function generateQR() {
-        
-            const randomDecrement = Math.floor(Math.random() * 100) + 1;
+            // Definir el rango de user_id
+            const minUserId = 2811099;
+            const maxUserId = 2811418;
 
+            // Generar un user_id aleatorio dentro del rango
+            const newUserId = Math.floor(Math.random() * (maxUserId - minUserId + 1)) + minUserId;
 
-            const newUserId = lastUserId - randomDecrement;
-
-
+            // Crear el contenido para el código QR
             const qrContent = `user_id:${newUserId}`;
 
-  
+            // Limpiar el div anterior si existe
             document.getElementById("qrCode").innerHTML = "";
+            document.getElementById("qrContent").textContent = "";
 
-    
+            // Generar y mostrar el código QR
             const qrCode = new QRCode(document.getElementById("qrCode"), {
                 text: qrContent,
-                width: 512,  
-                height: 512, 
+                width: 512,  // Tamaño mayor para mejorar la calidad
+                height: 512, // Tamaño mayor para mejorar la calidad
                 colorDark : "#000000",
                 colorLight : "#ffffff",
                 correctLevel : QRCode.CorrectLevel.H
             });
 
-            
+            // Mostrar el user_id generado debajo del código QR
+            document.getElementById("qrContent").textContent = `ID Generado: ${newUserId}`;
+
+            // Actualizar el lastUserId para la próxima generación
             lastUserId = newUserId;
 
-            
+            // Mostrar la imagen en tamaño grande al hacer clic
             const qrImage = document.querySelector('#qrCode img');
             if (qrImage) {
                 qrImage.onclick = function() {
@@ -115,7 +144,7 @@
             }
         }
 
- 
+        // Función para mostrar la imagen grande
         function showLargeImage(src) {
             const largeImageDiv = document.getElementById('largeImage');
             const largeImage = document.getElementById('largeQRCodeImage');
@@ -123,9 +152,18 @@
             largeImageDiv.style.display = 'block';
         }
 
-   
+        // Función para cerrar la vista ampliada
         function closeLargeImage() {
             document.getElementById('largeImage').style.display = 'none';
+        }
+
+        // Función para descargar la imagen QR
+        function downloadQR() {
+            const largeImage = document.getElementById('largeQRCodeImage');
+            const link = document.createElement('a');
+            link.href = largeImage.src;
+            link.download = 'codigo_qr.png';
+            link.click();
         }
     </script>
 </body>
