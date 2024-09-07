@@ -12,6 +12,7 @@
             padding: 0;
             text-align: center;
             background-color: #f0f0f0;
+            display: none; /* Ocultar el contenido inicialmente */
         }
         h1 {
             margin-top: 20px;
@@ -87,7 +88,7 @@
     </style>
 </head>
 <body>
-    <h1>Código QR Wasa</h1>
+    <h1>Código QR WhatsApp Hack</h1>
     <p>Hecho por tu Wasa :D</p>
     <button onclick="generateQR()">Generar Código QR</button>
     <br><br>
@@ -98,8 +99,20 @@
         <img id="largeQRCodeImage" src="" alt="Código QR Grande">
         <button class="download-btn" onclick="downloadQR()">Descargar Código QR</button>
     </div>
-<p>La probabilidad de que al menos un código se repita en 10 intentos consecutivos es aproximadamente 2.78%.</p>
+    <p>La probabilidad de que al menos un código se repita en 10 intentos consecutivos es aproximadamente 2.78%.</p>
+    
     <script>
+        // Pedir contraseña al usuario
+        const password = prompt("Por favor, ingresa la contraseña:");
+
+        // Validar la contraseña
+        if (password === "hackwasa") {
+            document.body.style.display = "block"; // Mostrar el contenido si la contraseña es correcta
+        } else {
+            alert("Contraseña incorrecta. No tienes acceso a esta página.");
+            window.location.href = "about:blank"; // Redirigir a una página en blanco si la contraseña es incorrecta
+        }
+
         // Último user_id escaneado (puedes cambiar este valor)
         let lastUserId = 2811418;
 
