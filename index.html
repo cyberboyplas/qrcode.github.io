@@ -12,7 +12,7 @@
             padding: 0;
             text-align: center;
             background-color: #f0f0f0;
-            display: none; /* Ocultar el contenido inicialmente */
+            display: none; 
         }
         h1 {
             margin-top: 20px;
@@ -102,53 +102,46 @@
     <p>La probabilidad de que al menos un código se repita en 10 intentos consecutivos es aproximadamente 2.78%.</p>
     
     <script>
-        // Pedir contraseña al usuario
+     
         const password = prompt("Por favor, ingresa la contraseña:");
 
-        // Validar la contraseña
+   
         if (password === "hackwasa") {
-            document.body.style.display = "block"; // Mostrar el contenido si la contraseña es correcta
+            document.body.style.display = "block";
         } else {
             alert("Contraseña incorrecta. No tienes acceso a esta página.");
-            window.location.href = "about:blank"; // Redirigir a una página en blanco si la contraseña es incorrecta
+            window.location.href = "about:blank"; 
         }
 
-        // Último user_id escaneado (puedes cambiar este valor)
         let lastUserId = 2811418;
 
-        // Función para generar y mostrar el código QR
+
         function generateQR() {
-            // Definir el rango de user_id
+
             const minUserId = 2811099;
             const maxUserId = 2811418;
 
-            // Generar un user_id aleatorio dentro del rango
             const newUserId = Math.floor(Math.random() * (maxUserId - minUserId + 1)) + minUserId;
 
-            // Crear el contenido para el código QR
             const qrContent = `user_id:${newUserId}`;
 
-            // Limpiar el div anterior si existe
             document.getElementById("qrCode").innerHTML = "";
             document.getElementById("qrContent").textContent = "";
 
-            // Generar y mostrar el código QR
             const qrCode = new QRCode(document.getElementById("qrCode"), {
                 text: qrContent,
-                width: 512,  // Tamaño mayor para mejorar la calidad
-                height: 512, // Tamaño mayor para mejorar la calidad
+                width: 512,  
+                height: 512,
                 colorDark : "#000000",
                 colorLight : "#ffffff",
                 correctLevel : QRCode.CorrectLevel.H
             });
 
-            // Mostrar el user_id generado debajo del código QR
             document.getElementById("qrContent").textContent = `ID Generado: ${newUserId}`;
 
-            // Actualizar el lastUserId para la próxima generación
+
             lastUserId = newUserId;
 
-            // Mostrar la imagen en tamaño grande al hacer clic
             const qrImage = document.querySelector('#qrCode img');
             if (qrImage) {
                 qrImage.onclick = function() {
@@ -157,7 +150,6 @@
             }
         }
 
-        // Función para mostrar la imagen grande
         function showLargeImage(src) {
             const largeImageDiv = document.getElementById('largeImage');
             const largeImage = document.getElementById('largeQRCodeImage');
@@ -165,12 +157,11 @@
             largeImageDiv.style.display = 'block';
         }
 
-        // Función para cerrar la vista ampliada
+
         function closeLargeImage() {
             document.getElementById('largeImage').style.display = 'none';
         }
 
-        // Función para descargar la imagen QR
         function downloadQR() {
             const largeImage = document.getElementById('largeQRCodeImage');
             const link = document.createElement('a');
